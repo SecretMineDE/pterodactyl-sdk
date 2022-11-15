@@ -11,11 +11,16 @@
         {
             "name": "HCGCloud Open Source",
             "email": "git@hcgcloud.com"
+        },
+        {
+            "name": "SecretMineDE",
+            "email": "git@secretmine.de"
         }
     ],
     "require": {
-        "php": ">=5.6.4",
-        "guzzlehttp/guzzle": "^6.0|^7.0"
+        "php": ">=8.0",
+        "guzzlehttp/guzzle": "^6.0|^7.0",
+      "ext-json": "*"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",

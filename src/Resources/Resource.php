@@ -113,31 +113,36 @@ class Resource implements ArrayAccess, JsonSerializable, Serializable
         unset($this->attributes[$offset]);
     }
 
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return $this->offsetExists($offset) ? $this->get($offset) : null;
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->set($offset, $value);
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         if ($this->offsetExists($offset)) {
             $this->forget($offset);
         }
     }
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return $this->has($offset);
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return $this->attributes;
+    }
+
+    public function __serialize()
+    {
+        return $this->serialize();
     }
 
     public function serialize()
@@ -148,5 +153,10 @@ class Resource implements ArrayAccess, JsonSerializable, Serializable
     public function unserialize($serialized)
     {
         return $this->attributes = unserialize($serialized);
+    }
+
+    public function __unserialize($serialized)
+    {
+        $this->unserialize($serialized);
     }
 }
