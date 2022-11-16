@@ -142,21 +142,21 @@ class Resource implements ArrayAccess, JsonSerializable, Serializable
 
     public function __serialize()
     {
-        return $this->serialize();
+        return $this->attributes;
     }
 
     public function serialize()
     {
-        return serialize($this->attributes);
+        return serialize($this->__serialize());
     }
 
     public function unserialize($serialized)
     {
-        return $this->attributes = unserialize($serialized);
+        $this->__unserialize(unserialize($serialized));
     }
 
-    public function __unserialize($serialized)
+    public function __unserialize($data)
     {
-        $this->unserialize($serialized);
+        $this->attributes = $data;
     }
 }
